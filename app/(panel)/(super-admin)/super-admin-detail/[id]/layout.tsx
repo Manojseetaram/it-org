@@ -1,28 +1,52 @@
 "use client";
 
-import Link from "next/link";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 import { useParams } from "next/navigation";
+import Link from "next/link";
+import { LucideHome, LucideUsers, LucideSettings } from "lucide-react";
 
 export default function SuperAdminLayout({ children }: { children: React.ReactNode }) {
   const { id } = useParams();
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-lg p-6 space-y-4">
-        <h2 className="text-xl font-bold text-blue-600 mb-6">Super Admin</h2>
-        <nav className="flex flex-col space-y-3">
-          <Link href={`/panel/super-admin/${id}`} className="text-gray-700 hover:text-blue-600">
-            Dashboard
-          </Link>
-          <Link href={`/panel/super-admin/${id}/details`} className="text-gray-700 hover:text-blue-600">
-            Details
-          </Link>
-          <Link href={`/panel/super-admin/${id}/settings`} className="text-gray-700 hover:text-blue-600">
-            Settings
-          </Link>
-        </nav>
-      </aside>
+    <div className="flex min-h-screen">
+      {/* ShadCN Sidebar */}
+      <Sidebar>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={`/panel/super-admin/${id}`} className="flex items-center gap-2">
+                      <LucideHome className="h-4 w-4" />
+                      <span>Dashboard</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={`/panel/super-admin/${id}/details`} className="flex items-center gap-2">
+                      <LucideUsers className="h-4 w-4" />
+                      <span>Details</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={`/panel/super-admin/${id}/settings`} className="flex items-center gap-2">
+                      <LucideSettings className="h-4 w-4" />
+                      <span>Settings</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
 
       {/* Main content */}
       <main className="flex-1 p-8">{children}</main>
